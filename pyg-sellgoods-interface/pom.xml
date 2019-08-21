@@ -16,6 +16,10 @@
         <artifactId>pyg-pojo</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </dependency>
+    <dependency>
+        <groupId>com.bxg.pyg</groupId>
+        <artifactId>pyg-dao</artifactId>
+    </dependency>
 </dependencies>
 
 </project>
