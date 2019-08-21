@@ -7,6 +7,13 @@
         <module>pyg-web</module>
         <module>pyg-dao</module>
         <module>pyg-server</module>
+        <module>pyg-shop-service</module>
+        <module>pyg-sellgoods-service</module>
+        <module>pyg-pojo</module>
+        <module>pyg-common</module>
+        <module>pyg-sellgoods-interface</module>
+        <module>pyg-manager-web</module>
+        <module>pyg-shop-web</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -76,15 +83,28 @@
                 <artifactId>pyg-service</artifactId>
                 <version>${module.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.bxg.pyg</groupId>
+                <artifactId>pyg-sellgoods-interface</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bxg.pyg</groupId>
+                <artifactId>pyg-sellgoods-service</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bxg.pyg</groupId>
+                <artifactId>pyg-manager-web</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bxg.pyg</groupId>
+                <artifactId>pyg-shop-web</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+
 
 </project>

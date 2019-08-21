@@ -1,15 +1,13 @@
-server:
-  port: 8080
 spring:
   datasource:
     username: root
     password: 123456
-    url: jdbc:mysql://localhost:3306/appinfodb?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://localhost:3306/pinyougoudb?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 mybatis:
   mapper-locations: classpath:mapping/*Mapper.xml
-  type-aliases-package: com.example.bean.Informations
+  type-aliases-package: com.bxg.pyg.mapper
 
 pagehelper:
   helperDialect: mysql
@@ -17,8 +15,3 @@ pagehelper:
   supportMethodsArguments: true
   params: count=countSql
 #showSql
-logging:
-  level:
-    com:
-      example:
-        mapper : debug
