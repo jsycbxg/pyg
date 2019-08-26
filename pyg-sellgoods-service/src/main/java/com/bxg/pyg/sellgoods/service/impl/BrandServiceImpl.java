@@ -4,12 +4,14 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.bxg.pyg.mapper.TbBrandMapper;
 import com.bxg.pyg.pojo.TbBrand;
+import com.bxg.pyg.pojo.TbBrandExample;
 import com.bxg.pyg.sellgoods.service.BrandService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import entity.PageResult;
 import entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 @Service
@@ -40,9 +42,30 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public PageResult findAll(Integer pageNum,Integer pageSize) {
+        public List<TbBrand>  findAll() {
+
+        List<TbBrand> userlist=mapper.selectByExample(null);
+
+        return userlist;
+    }
+    @Override
+    public PageResult findAll(TbBrand tbBrand,Integer pageNum,Integer pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        Page<TbBrand> userlist=(Page<TbBrand>) mapper.selectByExample(null);
+
+        TbBrandExample exaple=new TbBrandExample();
+        TbBrandExample.Criteria criteria=exaple.createCriteria();
+        if(tbBrand!=null){
+            if(!StringUtils.isEmpty(tbBrand.getName())){
+
+                criteria.andNameLike("%"+tbBrand.getName()+"%");
+            }
+            if(!StringUtils.isEmpty(tbBrand.getFirstChar())){
+
+                criteria.andFirstCharLike("%"+tbBrand.getFirstChar()+"%");
+            }
+        }
+
+        Page<TbBrand> userlist=(Page<TbBrand>) mapper.selectByExample(exaple);
 
         return new PageResult(userlist.getTotal(),userlist.getResult());
     }

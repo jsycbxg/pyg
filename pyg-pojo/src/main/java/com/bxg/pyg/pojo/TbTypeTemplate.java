@@ -1,5 +1,8 @@
 package com.bxg.pyg.pojo;
 
+import com.bxg.pyg.utils.CustomStringDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import java.io.Serializable;
 
 public class TbTypeTemplate implements Serializable {

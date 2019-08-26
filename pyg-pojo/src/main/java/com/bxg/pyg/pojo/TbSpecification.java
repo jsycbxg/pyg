@@ -1,11 +1,15 @@
 package com.bxg.pyg.pojo;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class TbSpecification implements Serializable {
     private Long id;
 
     private String specName;
+
+
+
 
     public Long getId() {
         return id;

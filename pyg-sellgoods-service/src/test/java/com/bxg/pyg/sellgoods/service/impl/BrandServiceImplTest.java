@@ -8,12 +8,4 @@ import static org.junit.Assert.*;
 
 public class BrandServiceImplTest {
 
-    @Autowired
-    private TbBrandMapper tbBrandMapper;
-
-    @Test
-    public void findAll() {
-
-        System.out.println(tbBrandMapper.selectByExample(null));
-    }
 }

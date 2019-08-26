@@ -1,5 +1,6 @@
 package com.bxg.pyg.manager.controller;
 
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -9,4 +10,29 @@ public class IndexController {
     public String brand(){
         return "admin/brand";
     }
+    @GetMapping("/admin/specification")
+    public String specification(){
+        return "admin/specification";
+    }
+    @GetMapping("/admin/type_template")
+    public String type_template(){
+        return "admin/type_template";
+    }
+    @GetMapping("/admin/index")
+    public String index(){
+        return "admin/index";
+    }
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
+    @GetMapping("/admin/home")
+    public String home(){
+        return "admin/home";
+    }
+    @GetMapping("/admin/logout")
+    public String logout(){
+        return "logout";
+    }
+
 }

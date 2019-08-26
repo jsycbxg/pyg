@@ -8,7 +8,7 @@ import entity.Result;
 import java.util.List;
 
 public interface BrandService {
-    public PageResult findAll(Integer pageNum, Integer pageSize);
+    public List<TbBrand> findAll();
     public Result add(TbBrand tbBrand);
 
     public Result edit(TbBrand tbBrand);
@@ -16,4 +16,6 @@ public interface BrandService {
     public  TbBrand findOne(Integer id);
 
     public Result del(List<Integer> ids);
+    public PageResult findAll(TbBrand tbBrand,Integer pageNum, Integer pageSize);
+
 }
