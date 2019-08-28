@@ -1,6 +1,8 @@
 package com.bxg.pyg.manager.controller;
+import java.security.acl.LastOwnerException;
 import java.util.List;
 
+import com.bxg.pyg.pojo.TbItem;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -111,6 +113,13 @@ public class ItemCatController {
 	@RequestMapping("/delete.do")
 	public Result delete(Long [] ids){
 		try {
+			for(Long id:ids){
+				TbItemCat tbItemCat=new TbItemCat();
+				tbItemCat.setParentId(id);
+				if(itemCatService.findPage(tbItemCat,1,1).getTotal()!=0){
+					return new Result(false, "请先删除该分类下的分类");
+				}
+			}
 			itemCatService.delete(ids);
 			return new Result(true, "删除成功"); 
 		} catch (Exception e) {

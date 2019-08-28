@@ -50,6 +50,13 @@ app.controller('itemCatController' ,function($scope,$controller   ,itemCatServic
 		if($scope.entity.id!=null){//如果有ID
 			serviceObject=itemCatService.update( $scope.entity ); //修改  
 		}else{
+			if($scope.grade==1){
+				$scope.entity.parentId=0;
+			}else if($scope.grade==2){
+                $scope.entity.parentId=$scope.entity_1.id;
+            }else if($scope.grade==3){
+                $scope.entity.parentId=$scope.entity_2.id;
+            }
 			serviceObject=itemCatService.add( $scope.entity  );//增加 
 		}				
 		serviceObject.success(
@@ -73,25 +80,44 @@ app.controller('itemCatController' ,function($scope,$controller   ,itemCatServic
 				if(response.success){
 					$scope.reloadList();//刷新列表
 					$scope.selectIds=[];
-				}						
+				}else{
+                    alert(response.message);
+                    $scope.selectIds=[];
+                }
 			}		
 		);				
 	}
-	
+	$scope.grade=1;
+	$scope.setgrade=function(value){
+        $scope.grade=value;
+	}
 	$scope.searchEntity={};//定义搜索对象
-	$scope.searchNext=function(ids){
-		$scope.searchEntity={id:ids};
+	$scope.searchNext=function(pentity){
+		$scope.searchEntity={id:pentity.id};
 		itemCatService.search($scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage,$scope.searchEntity).success(
 			function(response){
-				if(response.total>0){
 					$scope.list=response.rows;
 					$scope.paginationConf.totalItems=response.total;//更新总记录数
-					$scope.reloadList();//重新加载
-					$scope.findList(ids);
+					if(pentity.id!=0){
 
-				}else {
-					alert("无下级品牌");
-				}
+                    }else {
+                        $scope.grade=1;
+					}
+					if($scope.grade==1){
+						$scope.entity_1=null;
+                        $scope.entity_2=null;
+
+                    }else if($scope.grade==2){
+                        $scope.entity_1=pentity;
+                        $scope.entity_2=null;
+					}else if($scope.grade==3){
+                        $scope.entity_2=pentity;
+                    }
+
+
+					$scope.reloadList();//重新加载
+
+
 
 			}
 		);
