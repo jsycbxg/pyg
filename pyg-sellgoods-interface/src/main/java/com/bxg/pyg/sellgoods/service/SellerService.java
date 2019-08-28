@@ -3,6 +3,7 @@ import java.util.List;
 
 
 import com.bxg.pyg.pojo.TbSeller;
+import com.bxg.pyg.pojo.TbUser;
 import entity.PageResult;
 /**
  * 服务层接口
@@ -58,5 +59,6 @@ public interface SellerService {
 	 * @return
 	 */
 	public PageResult findPage(TbSeller seller, int pageNum, int pageSize);
-	
+
+    TbSeller findByusername(String username);
 }

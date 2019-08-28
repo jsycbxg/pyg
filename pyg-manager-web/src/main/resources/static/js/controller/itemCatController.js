@@ -23,12 +23,25 @@ app.controller('itemCatController' ,function($scope,$controller   ,itemCatServic
 	}
 	
 	//查询实体 
-	$scope.findOne=function(id){				
+	$scope.findOne=function(id,pid){
 		itemCatService.findOne(id).success(
 			function(response){
 				$scope.entity= response;					
 			}
-		);				
+		);
+		itemCatService.findList(pid).success(
+			function(response){
+				$scope.entity.list= response.message;
+			}
+		);
+	}
+	$scope.findList=function(id){
+		itemCatService.findList(id).success(
+			function(response){
+				$scope.entity.list= response.message;
+				$scope.entity.lists=$scope.entity.list.splice(" >> ");
+			}
+		);
 	}
 	
 	//保存 
@@ -65,8 +78,25 @@ app.controller('itemCatController' ,function($scope,$controller   ,itemCatServic
 		);				
 	}
 	
-	$scope.searchEntity={};//定义搜索对象 
-	
+	$scope.searchEntity={};//定义搜索对象
+	$scope.searchNext=function(ids){
+		$scope.searchEntity={id:ids};
+		itemCatService.search($scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage,$scope.searchEntity).success(
+			function(response){
+				if(response.total>0){
+					$scope.list=response.rows;
+					$scope.paginationConf.totalItems=response.total;//更新总记录数
+					$scope.reloadList();//重新加载
+					$scope.findList(ids);
+
+				}else {
+					alert("无下级品牌");
+				}
+
+			}
+		);
+
+	}
 	//搜索
 	$scope.search=function(page,rows){			
 		itemCatService.search(page,rows,$scope.searchEntity).success(

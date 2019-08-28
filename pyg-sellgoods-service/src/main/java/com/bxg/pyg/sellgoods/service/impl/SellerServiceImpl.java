@@ -28,6 +28,7 @@ public class SellerServiceImpl implements SellerService {
 	 */
 	@Override
 	public List<TbSeller> findAll() {
+
 		return sellerMapper.selectByExample(null);
 	}
 
@@ -159,5 +160,18 @@ public class SellerServiceImpl implements SellerService {
 		Page<TbSeller> page= (Page<TbSeller>)sellerMapper.selectByExample(example);		
 		return new PageResult(page.getTotal(), page.getResult());
 	}
-	
+
+	@Override
+	public TbSeller findByusername(String username) {
+		TbSellerExample example=new TbSellerExample();
+		example.createCriteria().andSellerIdEqualTo(username);
+		List<TbSeller> tbUsers=sellerMapper.selectByExample(example);
+
+		if(tbUsers.size()>0){
+			TbSeller tbUser=tbUsers.get(0);
+			return tbUser;
+		}
+		return null;
+	}
+
 }

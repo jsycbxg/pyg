@@ -68,6 +68,8 @@ public class ItemCatServiceImpl implements ItemCatService {
 		return itemCatMapper.selectByPrimaryKey(id);
 	}
 
+
+
 	/**
 	 * 批量删除
 	 */
@@ -89,6 +91,12 @@ public class ItemCatServiceImpl implements ItemCatService {
 		if(itemCat!=null){			
 						if(itemCat.getName()!=null && itemCat.getName().length()>0){
 				criteria.andNameLike("%"+itemCat.getName()+"%");
+			}
+			if(itemCat.getParentId()!=null){
+				criteria.andParentIdEqualTo(itemCat.getParentId());
+			}
+			if(itemCat.getId()!=null){
+				criteria.andParentIdEqualTo(itemCat.getId());
 			}
 	
 		}

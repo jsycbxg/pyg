@@ -21,6 +21,9 @@ app.service('itemCatService',function($http){
 	this.update=function(entity){
 		return  $http.post('../itemCat/update.do',entity );
 	}
+	this.findList=function(parendId){
+		return  $http.post('../itemCat/findList.do?id='+parendId );
+	}
 	//删除
 	this.dele=function(ids){
 		return $http.get('../itemCat/delete.do?ids='+ids);

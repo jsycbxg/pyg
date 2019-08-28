@@ -34,5 +34,13 @@ public class IndexController {
     public String logout(){
         return "logout";
     }
+    @GetMapping("/admin/seller_1")
+    public String seller_1(){
+        return "admin/seller_1";
+    }
+    @GetMapping("/admin/item_cat")
+    public String item_cat(){
+        return "admin/item_cat";
+    }
 
 }

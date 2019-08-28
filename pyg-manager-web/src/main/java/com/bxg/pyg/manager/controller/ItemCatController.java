@@ -26,7 +26,7 @@ public class ItemCatController {
 	 * 返回全部列表
 	 * @return
 	 */
-	@RequestMapping("/findAll")
+	@RequestMapping("/findAll.do")
 	public List<TbItemCat> findAll(){			
 		return itemCatService.findAll();
 	}
@@ -36,7 +36,7 @@ public class ItemCatController {
 	 * 返回全部列表
 	 * @return
 	 */
-	@RequestMapping("/findPage")
+	@RequestMapping("/findPage.do")
 	public PageResult  findPage(int page,int rows){			
 		return itemCatService.findPage(page, rows);
 	}
@@ -46,7 +46,7 @@ public class ItemCatController {
 	 * @param itemCat
 	 * @return
 	 */
-	@RequestMapping("/add")
+	@RequestMapping("/add.do")
 	public Result add(@RequestBody TbItemCat itemCat){
 		try {
 			itemCatService.add(itemCat);
@@ -62,7 +62,7 @@ public class ItemCatController {
 	 * @param itemCat
 	 * @return
 	 */
-	@RequestMapping("/update")
+	@RequestMapping("/update.do")
 	public Result update(@RequestBody TbItemCat itemCat){
 		try {
 			itemCatService.update(itemCat);
@@ -78,17 +78,37 @@ public class ItemCatController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping("/findOne")
+	@RequestMapping("/findOne.do")
 	public TbItemCat findOne(Long id){
 		return itemCatService.findOne(id);		
 	}
-	
+
+	@RequestMapping("/findList.do")
+	public Result findList(Long id){
+		StringBuffer list=new StringBuffer();
+		Long pid=id;
+		while (true){
+			TbItemCat tbItemCat=itemCatService.findOne(pid);
+			if(tbItemCat!=null){
+				list.append(tbItemCat.getName());
+				pid=tbItemCat.getParentId();
+
+			}else{
+				break;
+			}
+			list.append(" >> ");
+
+		}
+
+		return new Result(true, list.toString());
+	}
+
 	/**
 	 * 批量删除
 	 * @param ids
 	 * @return
 	 */
-	@RequestMapping("/delete")
+	@RequestMapping("/delete.do")
 	public Result delete(Long [] ids){
 		try {
 			itemCatService.delete(ids);
@@ -99,14 +119,8 @@ public class ItemCatController {
 		}
 	}
 	
-		/**
-	 * 查询+分页
-	 * @param brand
-	 * @param page
-	 * @param rows
-	 * @return
-	 */
-	@RequestMapping("/search")
+
+	@RequestMapping("/search.do")
 	public PageResult search(@RequestBody TbItemCat itemCat, int page, int rows  ){
 		return itemCatService.findPage(itemCat, page, rows);		
 	}

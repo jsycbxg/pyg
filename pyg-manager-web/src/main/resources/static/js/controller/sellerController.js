@@ -34,21 +34,34 @@ app.controller('sellerController' ,function($scope,$controller   ,sellerService)
 	//保存 
 	$scope.save=function(){				
 		var serviceObject;//服务层对象  				
-		if($scope.entity.id!=null){//如果有ID
-			serviceObject=sellerService.update( $scope.entity ); //修改  
-		}else{
-			serviceObject=sellerService.add( $scope.entity  );//增加 
-		}				
+
+		serviceObject=sellerService.add( $scope.entity  );//增加
 		serviceObject.success(
 			function(response){
 				if(response.success){
 					//重新查询 
-		        	$scope.reloadList();//重新加载
+		        	location.href="/shoplogin";
 				}else{
 					alert(response.message);
 				}
 			}		
 		);				
+	}
+	$scope.status=function(status){
+		var serviceObject;//服务层对象
+		$scope.entity.status=status;
+
+		serviceObject=sellerService.update( $scope.entity  );//增加
+		serviceObject.success(
+			function(response){
+				if(response.success){
+					//重新查询
+					location.href="admin/seller_1";
+				}else{
+					alert(response.message);
+				}
+			}
+		);
 	}
 	
 	 
@@ -65,8 +78,8 @@ app.controller('sellerController' ,function($scope,$controller   ,sellerService)
 		);				
 	}
 	
-	$scope.searchEntity={};//定义搜索对象 
-	
+	$scope.searchEntity={status:'0'};//定义搜索对象
+
 	//搜索
 	$scope.search=function(page,rows){			
 		sellerService.search(page,rows,$scope.searchEntity).success(

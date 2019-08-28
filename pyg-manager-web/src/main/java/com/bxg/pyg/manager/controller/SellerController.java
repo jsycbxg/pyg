@@ -26,7 +26,7 @@ public class SellerController {
 	 * 返回全部列表
 	 * @return
 	 */
-	@RequestMapping("/findAll")
+	@RequestMapping("/findAll.do")
 	public List<TbSeller> findAll(){			
 		return sellerService.findAll();
 	}
@@ -36,7 +36,7 @@ public class SellerController {
 	 * 返回全部列表
 	 * @return
 	 */
-	@RequestMapping("/findPage")
+	@RequestMapping("/findPage.do")
 	public PageResult  findPage(int page,int rows){			
 		return sellerService.findPage(page, rows);
 	}
@@ -46,7 +46,7 @@ public class SellerController {
 	 * @param seller
 	 * @return
 	 */
-	@RequestMapping("/add")
+	@RequestMapping("/add.do")
 	public Result add(@RequestBody TbSeller seller){
 		try {
 			sellerService.add(seller);
@@ -62,7 +62,7 @@ public class SellerController {
 	 * @param seller
 	 * @return
 	 */
-	@RequestMapping("/update")
+	@RequestMapping("/update.do")
 	public Result update(@RequestBody TbSeller seller){
 		try {
 			sellerService.update(seller);
@@ -78,7 +78,7 @@ public class SellerController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping("/findOne")
+	@RequestMapping("/findOne.do")
 	public TbSeller findOne(String id){
 		return sellerService.findOne(id);		
 	}
@@ -88,7 +88,7 @@ public class SellerController {
 	 * @param ids
 	 * @return
 	 */
-	@RequestMapping("/delete")
+	@RequestMapping("/delete.do")
 	public Result delete(String [] ids){
 		try {
 			sellerService.delete(ids);
@@ -99,14 +99,8 @@ public class SellerController {
 		}
 	}
 	
-		/**
-	 * 查询+分页
-	 * @param brand
-	 * @param page
-	 * @param rows
-	 * @return
-	 */
-	@RequestMapping("/search")
+
+	@RequestMapping("/search.do")
 	public PageResult search(@RequestBody TbSeller seller, int page, int rows  ){
 		return sellerService.findPage(seller, page, rows);		
 	}
